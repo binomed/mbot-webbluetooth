@@ -1,0 +1,24 @@
+<md-dialog aria-label="Bluetooth" ng-cloak>
+	<md-toolbar class="md-primary">
+		<div class="md-toolbar-tools">
+        <h2>Bluetooth</h2>        
+      </div>
+	</md-toolbar>
+	<div layout="row">
+		<div flex="20"></div>
+		<md-button class="md-raised md-primary" jf-touchstart="bleCtrl.up()" jf-touchend="bleCtrl.stop()" flex="60">Up</md-button>
+		<div flex="20"></div>
+	</div>
+	<div layout="row">
+		<md-button class="md-raised md-primary" jf-touchstart="bleCtrl.left()" jf-touchend="bleCtrl.stop()" flex="40">Left</md-button>
+		<div flex="20"></div>
+		<md-button class="md-raised md-primary" jf-touchstart="bleCtrl.right()" jf-touchend="bleCtrl.stop()"  flex="40">Right</md-button>
+	</div>
+	<div layout="row">
+		<div flex="20"></div>
+		<md-button class="md-raised md-primary" jf-touchstart="bleCtrl.down()" jf-touchend="bleCtrl.stop()"  flex="60" >Down</md-button>
+		<div flex="20"></div>
+	</div>
+	<canvas jf-colorpicker="bleCtrl.changeColor(red,blue,green)"></canvas>
+	<md-button class="md-raised md-warn" ng-click="bleCtrl.close()">Close</md-button>
+</md-dialog>
