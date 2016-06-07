@@ -78,29 +78,9 @@ angular.module("MbotApp", ['ngMaterial'])
 
 	return {
 		templateUrl: './components/app.html',
-		controllerAs : 'app',
+		controllerAs : 'bleCtrl',
 		bindToController : true,
-		controller: require('./sensors/bluetooth')/*function(){
-			this.actions = [
-				{label : "Bluetooth", icon : 'fa-bluetooth', idAction: 'ble'}
-			];
-
-					
-
-			this.openDialog = function(event, type){
-				console.log('Open Dialog');
-				if (type === 'ble'){
-					$mdDialog.show({
-						controllerAs : 'bleCtrl',
-						templateUrl: './components/bluetooth.html',
-						controller: require('./sensors/bluetooth'),
-						parent : angular.element(document.querySelector('#mainContainer')),
-						targetEvent : event,
-						fullScreen : true
-					});
-				}
-			}
-		}*/
+		controller: require('./sensors/bluetooth')
 	}
 }]);
 

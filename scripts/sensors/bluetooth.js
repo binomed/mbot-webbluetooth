@@ -125,6 +125,17 @@ function processMotors(valueM1, valueM2){
 	});
 }
 
+function processBuzzer(){
+    getCharacteristic()
+	.then(characteristic =>{
+		return characteristic.writeValue(mbotApi.genericControl(mbotApi.TYPE_SOUND, 0, 0, 0));
+	}).then(()=>{
+		console.info("Write datas ! ");
+	}).catch(error =>{
+		console.error(error);		
+	});
+}
+
 
 function BleController(){
 
@@ -155,6 +166,11 @@ function BleController(){
 	this.right = function(){
 		console.log("right");
 		processMotors(-100,-100);
+	};
+    
+    this.buzz = function(){
+		console.log("buzz");
+		processBuzzer();
 	};
 
 	this.stop = function(){

@@ -90,19 +90,19 @@ function genericControl(type, port, slot, value){
 			//ff:55:05:00:02:22:5d:01:0a
 			//ff:55:05:00:02:22:4a:01:0a
 			//ff:55:05:00:02:22:26:01:0a
-			byte3 = 0x05;
-			byte4 = 0x00;
-			byte5 = 0x02;
-			byte6 = 0x22;
+            byte2 = 0x05;
+			byte3 = 0x00;
+			byte4 = 0x02;
+			byte5 = 0x22;
 			if (value === 0){
-				byte7 = 0x00;
-				byte8 = 0x00;
+				byte6 = 0x06;
+				byte7 = 0x01;
 			}else{
 
-				byte7 = 0xee;
-				byte8 = 0x01;
+				byte6 = 0xee;
+				byte7 = 0x01;
 			}
-			byte9 = 0x0a;
+			byte8 = 0x0a;
 			byte12= 0x00;
 
 		break;
