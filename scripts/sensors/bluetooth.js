@@ -2,9 +2,7 @@
 
 const mbotApi = require('../mbot/mbot');  
 
-var serverGATT = null,
-	serviceGATT = null,
-	characteristicGATT = null,
+let deviceBle = null,
 	encoder = new TextEncoder();
 
 function initBle(){
@@ -13,11 +11,12 @@ function initBle(){
 			filters: [{ name: mbotApi.DEVICE_NAME }], optionalServices: [mbotApi.SERVICE_UUID]
 		})
 		.then(function(device) {
+		   deviceBle = device;
 		   console.log("Connecting...");
-		   return device.connectGATT();
+		   return device.gatt.connect();
 		 })
 		.then(function(server) {
-			serverGATT = server;
+			
 			//return server.getPrimaryService(serviceUUID);
 		   // FIXME: Remove this timeout when GattServices property works as intended.
 		   // crbug.com/560277
@@ -42,7 +41,7 @@ function initBle(){
 }
 
 
-function getService(){
+/*function getService(){
 	return new Promise(function(resolve, reject){
 		if (serverGATT && serverGATT.connected && serviceGATT){
 			resolve(serviceGATT);
@@ -56,14 +55,22 @@ function getService(){
 			});
 		}
 	});
-}
+}*/
 
 function getCharacteristic(){
 	return new Promise(function(resolve, reject){
-		if (characteristicGATT){
-			resolve(characteristicGATT);
+		if (deviceBle){
+			deviceBle.gatt.getPrimaryService(mbotApi.SERVICE_UUID)
+			.then(service => service.getCharacteristic(mbotApi.CHARACTERISTIC_UUID))
+			.then(characteristic => resolve(characteristic));
+			//resolve(characteristicGATT);
 		}else{
-			getService()
+			initBle().then(()=>{
+				deviceBle.gatt.getPrimaryService(mbotApi.SERVICE_UUID)
+				.then(service => service.getCharacteristic(mbotApi.CHARACTERISTIC_UUID))
+				.then(characteristic => resolve(characteristic));
+			});
+			/*getService()
 			.then(function(service){
 				console.log("Try to get Characteritic : %O",service);
 				return service.getCharacteristic(mbotApi.CHARACTERISTIC_UUID);
@@ -73,19 +80,19 @@ function getCharacteristic(){
 				resolve(characteritic);
 			}).catch(function(error){
 				reject(error);
-			});
+			});*/
 		}
 	});
 }
 
 function processCharacteristic(type, data, callback){
 	getCharacteristic()
-	.then(function(characteristic){
+	.then(characteristic=>{
 		if (type === 'write'){			
 			console.log("Try to write value : %O",characteristic);
 			return characteristic.writeValue(data);
 		}
-	}).then(function(buffer){
+	}).then(buffer=>{
 		if (type === 'write'){
 			if(callback){
 				callback({type: 'write', value : true});			
@@ -97,7 +104,7 @@ function processCharacteristic(type, data, callback){
 		    callback({type: 'read' , value : dataDecrypt});
 		    console.log('ReceiveDatas %s', dataDecrypt);
 		}
-	}).catch(function(error){
+	}).catch(error=>{
 		console.error(error);
 		if (callback) {
 
@@ -106,7 +113,7 @@ function processCharacteristic(type, data, callback){
 	});
 }
 
-function processMotors(valueM1, valueM2){
+function processMotors(valueM1, valueM2){	
 	getCharacteristic()
 	.then(characteristic =>{
 		return characteristic.writeValue(mbotApi.genericControl(mbotApi.TYPE_MOTOR, mbotApi.M_1, 0, valueM1));

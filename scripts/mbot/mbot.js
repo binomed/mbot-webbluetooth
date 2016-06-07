@@ -32,19 +32,19 @@ function genericControl(type, port, slot, value){
 	var buf = new ArrayBuffer(16);
 	var bufView = new Uint16Array(buf);
 	
-	var byte0 = 0xff,
-		byte1 = 0x55,
-		byte2 = 0x09,
-		byte3 = 0x00,
-		byte4 = 0x02,
-		byte5 = type,
-		byte6 = port,
-		byte7 = slot;
+	var byte0 = 0xff, // Static header
+		byte1 = 0x55, // Static header
+		byte2 = 0x09, // len
+		byte3 = 0x00, // idx
+		byte4 = 0x02, // action
+		byte5 = type, // device
+		byte6 = port, // port
+		byte7 = slot; // slot
 	//dynamics values
-	var byte8 = 0x00,
-		byte9 = 0x00,
-		byte10 = 0x00,
-		byte11 = 0x00;
+	var byte8 = 0x00, // data
+		byte9 = 0x00, // data
+		byte10 = 0x00, // data
+		byte11 = 0x00; // data
 	//End of message
 	var byte12 = 0x0a,
 		byte13 = 0x00,
@@ -91,15 +91,30 @@ function genericControl(type, port, slot, value){
 			//ff:55:05:00:02:22:4a:01:0a
 			//ff:55:05:00:02:22:26:01:0a
             byte2 = 0x05;
-			byte3 = 0x00;
-			byte4 = 0x02;
 			byte5 = 0x22;
 			if (value === 0){
+				byte6 = 0x00;
+				byte7 = 0x00;
+			}else if (value === 1){
 				byte6 = 0x06;
 				byte7 = 0x01;
-			}else{
-
+			}else if (value === 2){
 				byte6 = 0xee;
+				byte7 = 0x01;
+			}else if (value === 3){
+				byte6 = 0x88;
+				byte7 = 0x01;
+			}else if (value === 4){
+				byte6 = 0xb8;
+				byte7 = 0x01;
+			}else if (value === 5){
+				byte6 = 0x5d;
+				byte7 = 0x01;
+			}else if (value === 6){
+				byte6 = 0x4a;
+				byte7 = 0x01;
+			}else{
+				byte6 = 0x26;
 				byte7 = 0x01;
 			}
 			byte8 = 0x0a;
