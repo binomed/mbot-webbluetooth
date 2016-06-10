@@ -27,5 +27,24 @@ canvas{
             align-self: center;
         }
     }
+    
+    #stepControl{
+        .row{
+            display: flex;
+            flex-direction: row;   
+        }
+    }
+}
+
+.demo-card-wide.mdl-card {
+  width: 512px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #000;
+  height: 176px;
+  background: url('../assets/images/mbot_face.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
 }
 
