@@ -31,7 +31,6 @@ function initBle(){
 		     }, 2e3);
 		   })
 		}).then(function(service){
-			serviceGATT = service;
 			resolve(service);			
 		}).catch(function(error){
 			console.error(error);
@@ -40,22 +39,10 @@ function initBle(){
 	})
 }
 
-
-/*function getService(){
-	return new Promise(function(resolve, reject){
-		if (serverGATT && serverGATT.connected && serviceGATT){
-			resolve(serviceGATT);
-		}else{
-			initBle()
-			.then(function(service){
-				resolve(service);
-			})
-			.catch(function(error){
-				reject(error);
-			});
-		}
-	});
-}*/
+function writeCharacteristic(data){
+    return getCharacteristic()
+    .then(characteristic => characteristic.writeValue(data));
+}
 
 function getCharacteristic(){
 	return new Promise(function(resolve, reject){
@@ -63,36 +50,19 @@ function getCharacteristic(){
 			deviceBle.gatt.getPrimaryService(mbotApi.SERVICE_UUID)
 			.then(service => service.getCharacteristic(mbotApi.CHARACTERISTIC_UUID))
 			.then(characteristic => resolve(characteristic));
-			//resolve(characteristicGATT);
 		}else{
 			initBle().then(()=>{
 				deviceBle.gatt.getPrimaryService(mbotApi.SERVICE_UUID)
 				.then(service => service.getCharacteristic(mbotApi.CHARACTERISTIC_UUID))
 				.then(characteristic => resolve(characteristic));
 			});
-			/*getService()
-			.then(function(service){
-				console.log("Try to get Characteritic : %O",service);
-				return service.getCharacteristic(mbotApi.CHARACTERISTIC_UUID);
-			})
-			.then(function(characteritic){
-				characteristicGATT = characteritic;
-				resolve(characteritic);
-			}).catch(function(error){
-				reject(error);
-			});*/
 		}
 	});
 }
 
 function processCharacteristic(type, data, callback){
-	getCharacteristic()
-	.then(characteristic=>{
-		if (type === 'write'){			
-			console.log("Try to write value : %O",characteristic);
-			return characteristic.writeValue(data);
-		}
-	}).then(buffer=>{
+	writeCharacteristic(data)
+    .then(buffer=>{
 		if (type === 'write'){
 			if(callback){
 				callback({type: 'write', value : true});			
@@ -114,11 +84,9 @@ function processCharacteristic(type, data, callback){
 }
 
 function processMotors(valueM1, valueM2){	
-	getCharacteristic()
-	.then(characteristic =>{
-		return characteristic.writeValue(mbotApi.genericControl(mbotApi.TYPE_MOTOR, mbotApi.M_1, 0, valueM1));
-	}).then(()=>{
-		return characteristicGATT.writeValue(mbotApi.genericControl(mbotApi.TYPE_MOTOR, mbotApi.M_2, 0, valueM2));
+	writeCharacteristic(mbotApi.genericControl(mbotApi.TYPE_MOTOR, mbotApi.M_1, 0, valueM1))
+	.then(()=>{
+		return writeCharacteristic(mbotApi.genericControl(mbotApi.TYPE_MOTOR, mbotApi.M_2, 0, valueM2));
 	}).then(()=>{
 		if(callback){
 			callback({type: 'write', value : true});			
@@ -133,10 +101,8 @@ function processMotors(valueM1, valueM2){
 }
 
 function processBuzzer(){
-    getCharacteristic()
-	.then(characteristic =>{
-		return characteristic.writeValue(mbotApi.genericControl(mbotApi.TYPE_SOUND, 0, 0, 0));
-	}).then(()=>{
+    writeCharacteristic(mbotApi.genericControl(mbotApi.TYPE_SOUND, 0, 0, 0))
+	.then(()=>{
 		console.info("Write datas ! ");
 	}).catch(error =>{
 		console.error(error);		

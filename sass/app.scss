@@ -10,3 +10,22 @@ html, body{
 canvas{
 	margin:auto;
 }
+
+.mdl-layout .mdl-layout__content{
+    display: flex;
+    
+    .page-content{
+        display: flex;
+        flex:1; 
+        justify-content: center;
+        flex-direction: column;
+                
+                
+                
+        #noBluetooth, #stepConnect, #stepControl{
+            display: flex;
+            align-self: center;
+        }
+    }
+}
+

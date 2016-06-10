@@ -1,27 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Mbot WebBluetooth</title>
-	<link rel="stylesheet" type="text/css" href="css/app.css">
-	<link rel="manifest" href="manifest.json">
-	<!--<meta name="HandheldFriendly" content="true" />
+    <meta charset="UTF-8">
+    <title>Mbot WebBluetooth</title>
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="manifest" href="manifest.json">
+    <!--<meta name="HandheldFriendly" content="true" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="apple-mobile-web-app-title" content="Phaser App">-->
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-	<link rel="stylesheet" href="./node_modules/angular-material/angular-material.min.css">
-	<link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
-	<link rel="icon" type="image/png" href="./assets/images/logo.png">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <link rel="icon" type="image/png" href="./assets/images/logo.png">
 </head>
-<body ng-app="MbotApp">
-	
-	<app>
-	</app>
-	<script src="./node_modules/angular/angular.js"></script> 
-	<script src="./node_modules/angular-aria/angular-aria.js"></script> 
-	<script src="./node_modules/angular-animate/angular-animate.js"></script> 
-	<script src="./node_modules/angular-material/angular-material.js"></script> 
-	<script src="./bundle.js"></script>	
+
+<body>
+
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">MBot Application</span>
+
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <!-- Your content goes here -->
+                <section id="noBluetooth">
+                    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text">No bluettooth</h2>
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            Web Bluetooth isn't currently enabled. Please check that your browser and device support it and have any necessary development
+                            flags set.
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      Get Started
+    </a>
+                        </div>
+                        <div class="mdl-card__menu">
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                <i class="material-icons">bluetooth_disabled</i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                <section id="stepConnect" style="display:none;">
+                    <!-- Raised disabled button-->
+                    <button id="connectBtn" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                        Connect <i class="material-icons">bluetooth</i>
+                    </button>
+                </section>
+                <section id="stepControl" style="display:none;">
+                    <div layout="row">
+                        <div flex="20"></div>
+                        <md-button class="md-raised md-primary" mbot-touchstart="bleCtrl.up()" mbot-touchend="bleCtrl.stop()" flex="60">Up</md-button>
+                        <div flex="20"></div>
+                    </div>
+                    <div layout="row">
+                        <md-button class="md-raised md-primary" mbot-touchstart="bleCtrl.left()" mbot-touchend="bleCtrl.stop()" flex="40">Left</md-button>
+                        <div flex="20"></div>
+                        <md-button class="md-raised md-primary" mbot-touchstart="bleCtrl.right()" mbot-touchend="bleCtrl.stop()" flex="40">Right</md-button>
+                    </div>
+                    <div layout="row">
+                        <div flex="20"></div>
+                        <md-button class="md-raised md-primary" mbot-touchstart="bleCtrl.down()" mbot-touchend="bleCtrl.stop()" flex="60">Down</md-button>
+                        <div flex="20"></div>
+                    </div>
+                    <canvas mbot-colorpicker="bleCtrl.changeColor(red,blue,green)"></canvas>
+                    <div layout="row">
+                        <div flex="20"></div>
+                        <md-button class="md-raised md-primary" mbot-touchstart="bleCtrl.buzz()" flex="60">Buzz</md-button>
+                        <div flex="20"></div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="./bundle.js"></script>
 </body>
+
 </html>

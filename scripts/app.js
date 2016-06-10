@@ -1,5 +1,5 @@
 'use strict'
-
+/*
 angular.module("MbotApp", ['ngMaterial'])
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
@@ -82,10 +82,38 @@ angular.module("MbotApp", ['ngMaterial'])
 		bindToController : true,
 		controller: require('./sensors/bluetooth')
 	}
-}]);
+}]);*/
 
 
-function pageLoad(){		
+function pageLoad() {
+
+    let noBluetooth = document.getElementById("noBluetooth");
+    let stepConnect = document.getElementById("stepConnect");
+    let stepControl = document.getElementById("stepControl");
+    if (navigator.bluetooth == undefined) {
+        console.error("No navigator.bluetooth found.");
+        stepConnect.style.display = "none";
+        noBluetooth.style.display = "block";
+        
+        
+        
+    } else {
+        stepConnect.style.display = "block";
+        noBluetooth.style.display = "none";
+        
+        document.getElementById("connectBtn").addEventListener('click', _=>{            
+            let mBot = require("./mbot/mbot");
+            mBot.request()
+            .then(_=>{
+                return mBot.connect();
+            })
+            .then(_=>{
+                stepConnect.style.display = "none";
+                stepControl.style.display = "block";
+            })
+        });
+    }
+
 }
 
 

@@ -15,7 +15,7 @@ gulp.task('watch',['browserify', 'sass'], function(){
   browserSync.init({
      server:'./'
   });
-  gulp.watch("./scss/**/*.scss", ['sass']);
+  gulp.watch("./sass/**/*.scss", ['sass']);
   gulp.watch("./scripts/**/*.js", ['browserify']);  
   gulp.watch("./**/*.html").on('change', reload);  
   gulp.watch("./bundle.js").on('change', reload);
