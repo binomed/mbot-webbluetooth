@@ -32,6 +32,7 @@ canvas{
         .row{
             display: flex;
             flex-direction: row;   
+            margin: 20px;
         }
     }
 }
@@ -55,3 +56,12 @@ canvas{
   color: #fff;
 }
 
+.flex20{
+    flex:0.2;
+}
+.flex60{
+    flex:0.6;
+}
+.flex40{
+    flex:0.4;
+}

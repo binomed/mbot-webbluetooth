@@ -1,5 +1,16 @@
 'use strict'
 
+class Config {
+
+    constructor() {
+    }
+
+    name() { return "Makeblock_LE"; }
+    service() { return "0000ffe1-0000-1000-8000-00805f9b34fb" }
+    charateristic() { return "0000ffe3-0000-1000-8000-00805f9b34fb" }
+}
+
+
 const TYPE_MOTOR = 0x0a,
     TYPE_RGB = 0x08,
     TYPE_SOUND = 0x07;
@@ -15,17 +26,7 @@ const PORT_1 = 0x01,
     PORT_8 = 0x08,
     M_1 = 0x09,
     M_2 = 0x0a;
-
-
-class Config {
-
-    constructor() {
-    }
-
-    name() { return "Makeblock_LE"; }
-    service() { return "0000ffe1-0000-1000-8000-00805f9b34fb" }
-    charateristic() { return "0000ffe3-0000-1000-8000-00805f9b34fb" }
-}
+    
 
 class MBot {
     constructor() {
@@ -79,7 +80,7 @@ class MBot {
 		let gHex = green<<16;
 		let bHex = blue<<24;
 		let value = rHex | gHex | bHex;
-		this._processCharacteristic('write', this._genericControl(TYPE_RGB,PORT_6,0,value));
+		this._writeCharacteristic(this._genericControl(TYPE_RGB,PORT_6,0,value));
         
     }
 
@@ -240,7 +241,7 @@ class MBot {
 
     _writeCharacteristic(value) {
         return this.device.gatt.getPrimaryService(this.config.service())
-            .then(service => service.getCharacteristic(this.config.characteristic()))
+            .then(service => service.getCharacteristic(this.config.charateristic()))
             .then(characteristic => characteristic.writeValue(value));
     }
 
