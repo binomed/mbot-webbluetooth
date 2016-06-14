@@ -53,31 +53,45 @@
                     </div>
                 </section>
                 <section id="stepConnect" style="display:none;">
+                    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text">Connect to mBot</h2>
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            You have to be connect to the mBot to play with it
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <button id="connectBtn" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                Connect <i class="material-icons">bluetooth</i>
+                            </button>
+                        </div>
+                    </div>
                     <!-- Raised disabled button-->
-                    <button id="connectBtn" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                        Connect <i class="material-icons">bluetooth</i>
-                    </button>
                 </section>
                 <section id="stepControl" style="display:none;">
                     <div class="row">
                         <div flex="20"></div>
-                        <button class="mdl-button mdl-js-button mdl-button-raised mdl-button-colored mdl-js-ripple-effect" mbot-touchstart="bleCtrl.up()" mbot-touchend="bleCtrl.stop()" flex="60">
+                        <button class="mdl-button mdl-js-button mdl-button-raised mdl-button-colored mdl-js-ripple-effect" mbot-touchstart="bleCtrl.up()"
+                            mbot-touchend="bleCtrl.stop()" flex="60">
                             Up
                         </button>
                         <div flex="20"></div>
                     </div>
                     <div class="row">
-                        <button class="mdl-button mdl-js-button mdl-button-raised mdl-button-colored mdl-js-ripple-effect" mbot-touchstart="bleCtrl.left()" mbot-touchend="bleCtrl.stop()" flex="40">
+                        <button class="mdl-button mdl-js-button mdl-button-raised mdl-button-colored mdl-js-ripple-effect" mbot-touchstart="bleCtrl.left()"
+                            mbot-touchend="bleCtrl.stop()" flex="40">
                             Left
                         </button>
                         <div flex="20"></div>
-                        <button class="mdl-button mdl-js-button mdl-button-raised mdl-button-colored mdl-js-ripple-effect" mbot-touchstart="bleCtrl.right()" mbot-touchend="bleCtrl.stop()" flex="40">
+                        <button class="mdl-button mdl-js-button mdl-button-raised mdl-button-colored mdl-js-ripple-effect" mbot-touchstart="bleCtrl.right()"
+                            mbot-touchend="bleCtrl.stop()" flex="40">
                             Right
                         </button>
                     </div>
                     <div class="row">
                         <div flex="20"></div>
-                        <button class="mdl-button mdl-js-button mdl-button-raised mdl-button-colored mdl-js-ripple-effect" mbot-touchstart="bleCtrl.down()" mbot-touchend="bleCtrl.stop()" flex="60">
+                        <button class="mdl-button mdl-js-button mdl-button-raised mdl-button-colored mdl-js-ripple-effect" mbot-touchstart="bleCtrl.down()"
+                            mbot-touchend="bleCtrl.stop()" flex="60">
                             Down
                         </button>
                         <div flex="20"></div>
@@ -85,7 +99,8 @@
                     <canvas mbot-colorpicker="bleCtrl.changeColor(red,blue,green)"></canvas>
                     <div class="row">
                         <div flex="20"></div>
-                        <button class="mdl-button mdl-js-button mdl-button-raised mdl-button-colored mdl-js-ripple-effect" mbot-touchstart="bleCtrl.buzz()" flex="60">
+                        <button class="mdl-button mdl-js-button mdl-button-raised mdl-button-colored mdl-js-ripple-effect" mbot-touchstart="bleCtrl.buzz()"
+                            flex="60">
                             Buzz
                         </button>
                         <div flex="20"></div>
