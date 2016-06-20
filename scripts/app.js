@@ -32,6 +32,24 @@ function pageLoad() {
 		new ColorPicker((rgb) => {
 			mBot.processColor(rgb.red, rgb.blue, rgb.green);
 		});
+        
+        let Joystick = require('./components/joystick.js');
+        new Joystick('joystick');
+        
+        let partJoystick = document.querySelector('.part-joystick');
+        let partBtn = document.querySelector('.part-button');
+        let switchParts = document.getElementById('switchParts');
+        switchParts.addEventListener('click', function(evt){
+           if (this.checked){
+               partBtn.style.display = 'none';
+               partJoystick.style.display = '';
+           }else{
+               partBtn.style.display = '';
+               partJoystick.style.display = 'none';
+               
+           } 
+        });
+        
     }
 	
 }

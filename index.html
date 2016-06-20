@@ -68,33 +68,48 @@
                     </div>
                     <!-- Raised disabled button-->
                 </section>
-                <section id="stepControl" style="display:none;">
+                <section id="stepControl" style="display:none;">                     
+                            
                     <div class="row">
-                        <div class="flex20"></div>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" mbot-touchstart="bleCtrl.up()"
-                            mbot-touchend="bleCtrl.stop()">
+                        <label for="switchParts" class="mdl-switch mdl-js-switch">
+                            <input type="checkbox" id="switchParts" class="mdl-switch__input">
+                            <span class="mdl-switch__label">Joystick / Buttons</span>
+                        </label>
+                    </div>
+                    <div class="part-joystick">
+                        <div class="row">
+                            
+                            <div id="joystick"></div>
+                        </div>
+                    </div>
+                    <div class="part-button" style="display:none">
+                        <div class="row">
+                            <div class="flex20"></div>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" mbot-touchstart="bleCtrl.up()"
+                                mbot-touchend="bleCtrl.stop()">
                             Up
                         </button>
-                        <div class="flex20"></div>
-                    </div>
-                    <div class="row">
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" mbot-touchstart="bleCtrl.left()"
-                            mbot-touchend="bleCtrl.stop()" >
+                            <div class="flex20"></div>
+                        </div>
+                        <div class="row">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" mbot-touchstart="bleCtrl.left()"
+                                mbot-touchend="bleCtrl.stop()">
                             Left
                         </button>
-                        <div class="flex20"></div>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" mbot-touchstart="bleCtrl.right()"
-                            mbot-touchend="bleCtrl.stop()" >
+                            <div class="flex20"></div>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" mbot-touchstart="bleCtrl.right()"
+                                mbot-touchend="bleCtrl.stop()">
                             Right
                         </button>
-                    </div>
-                    <div class="row">
-                        <div class="flex20"></div>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" mbot-touchstart="bleCtrl.down()"
-                            mbot-touchend="bleCtrl.stop()" >
+                        </div>
+                        <div class="row">
+                            <div class="flex20"></div>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" mbot-touchstart="bleCtrl.down()"
+                                mbot-touchend="bleCtrl.stop()">
                             Down
                         </button>
-                        <div class="flex20"></div>
+                            <div class="flex20"></div>
+                        </div>
                     </div>
                     <canvas mbot-colorpicker="bleCtrl.changeColor(red,blue,green)"></canvas>
                     <div class="row">
@@ -109,6 +124,7 @@
         </main>
     </div>
     <script src="./bundle.js"></script>
+    <script src="./libs/nipplejs.js"></script>
 </body>
 
 </html>
