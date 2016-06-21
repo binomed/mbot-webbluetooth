@@ -8,12 +8,12 @@ function pageLoad() {
     if (navigator.bluetooth == undefined) {
         console.error("No navigator.bluetooth found.");
         stepConnect.style.display = "none";
-        noBluetooth.style.display = "block";
+        noBluetooth.style.display = "flex";
         
         
         
     } else {
-        stepConnect.style.display = "block";
+        stepConnect.style.display = "flex";
         noBluetooth.style.display = "none";
         let mBot = require("./mbot/mbot");
         
@@ -24,7 +24,24 @@ function pageLoad() {
             })
             .then(_=>{
                 stepConnect.style.display = "none";
-                stepControl.style.display = "block";
+                stepControl.style.display = "flex";
+                
+                let Joystick = require('./components/joystick.js');
+                new Joystick('joystick');
+                
+                let partJoystick = document.querySelector('.part-joystick');
+                let partBtn = document.querySelector('.part-button');
+                let switchParts = document.getElementById('switchParts');
+                switchParts.addEventListener('click', function(evt){
+                if (this.checked){
+                    partBtn.style.display = 'none';
+                    partJoystick.style.display = '';
+                }else{
+                    partBtn.style.display = '';
+                    partJoystick.style.display = 'none';
+                    
+                } 
+                });
             })
         });
 		
@@ -33,22 +50,6 @@ function pageLoad() {
 			mBot.processColor(rgb.red, rgb.blue, rgb.green);
 		});
         
-        let Joystick = require('./components/joystick.js');
-        new Joystick('joystick');
-        
-        let partJoystick = document.querySelector('.part-joystick');
-        let partBtn = document.querySelector('.part-button');
-        let switchParts = document.getElementById('switchParts');
-        switchParts.addEventListener('click', function(evt){
-           if (this.checked){
-               partBtn.style.display = 'none';
-               partJoystick.style.display = '';
-           }else{
-               partBtn.style.display = '';
-               partJoystick.style.display = 'none';
-               
-           } 
-        });
         
     }
 	

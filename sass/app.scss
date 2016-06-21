@@ -11,6 +11,15 @@ canvas{
 	margin:auto;
 }
 
+.mdl-layout__header-row{
+    img{
+        max-height: 90%;
+        margin-right: 20px;
+        left: -50px;
+        position:relative;
+    }
+}
+
 .mdl-layout .mdl-layout__content{
     display: flex;
     
@@ -22,19 +31,50 @@ canvas{
                 
                 
                 
-        #noBluetooth, #stepConnect, #stepControl{
+        #noBluetooth, #stepConnect/*, #stepControl*/{
             display: flex;
             align-self: center;
         }
     }
     
     #stepControl{
+        display: flex;
+        flex:1;
+        flex-direction: column; 
+          
         .row{
             display: flex;
             flex-direction: row;   
             margin: 20px;
         }
+        
+        /*.mdl-tabs__panel{
+            display: flex;
+        }*/
+        
+        .panel-flex{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .mdl-tabs__tab-bar{
+            margin-bottom: 20px;
+        }
+        
+        .part-joystick{
+            display: flex;
+            justify-content: center;
+        }
+        
+        h2{
+            margin:auto;
+            margin-bottom: 20px;
+            text-align: center;
+        }
     }
+    
+    
 }
 
 .demo-card-wide.mdl-card {
@@ -66,7 +106,7 @@ canvas{
     flex:0.4;
 }
 
-$joystick-size:300px;
+$joystick-size:200px;
 
 #joystick{
     position:relative;
@@ -74,7 +114,7 @@ $joystick-size:300px;
     height:$joystick-size;
     
     .front, .back{
-        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.14), 0 6px 3px -3px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.12);
         background: #3f51b5;
         opacity: 1;
     }

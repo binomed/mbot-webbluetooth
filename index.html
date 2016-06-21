@@ -18,20 +18,22 @@
 </head>
 
 <body>
-
     <!-- Always shows a header, even in smaller screens. -->
+
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
+                <img src="./assets/images/logo_128.png">
                 <span class="mdl-layout-title">MBot Application</span>
 
             </div>
         </header>
-        <main class="mdl-layout__content">
+        <div class="mdl-layout__content">
             <div class="page-content">
                 <!-- Your content goes here -->
                 <section id="noBluetooth">
+
                     <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text">No Bluetooth</h2>
@@ -68,60 +70,86 @@
                     </div>
                     <!-- Raised disabled button-->
                 </section>
-                <section id="stepControl" style="display:none;">                     
-                            
-                    <div class="row">
-                        <label for="switchParts" class="mdl-switch mdl-js-switch">
-                            <input type="checkbox" id="switchParts" class="mdl-switch__input">
-                            <span class="mdl-switch__label">Joystick / Buttons</span>
-                        </label>
-                    </div>
-                    <div class="part-joystick">
-                        <div class="row">
-                            
-                            <div id="joystick"></div>
+                <section id="stepControl" style="display:none;">
+                    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                        <div class="mdl-tabs__tab-bar">
+                            <a href="#control-panel" class="mdl-tabs__tab is-active">Controls</a>
+                            <a href="#color-panel" class="mdl-tabs__tab">Color</a>
+                            <a href="#sound-panel" class="mdl-tabs__tab">Sound</a>
+                        </div>
+
+                        <div class="mdl-tabs__panel is-active" id="control-panel">
+                            <div class="panel-flex">
+                                <h2 class="mdl-card__title-text">Choose the way to move your mbot</h2>
+                                <div class="row">
+                                    <label for="switchParts" class="mdl-switch mdl-js-switch">
+                                        <input type="checkbox" checked id="switchParts" class="mdl-switch__input">
+                                        <span class="mdl-switch__label">Buttons / Joystick</span>
+                                    </label>
+                                </div>
+                                <div class="part-joystick">
+                                    <div class="row">
+                                        <div id="joystick"></div>
+                                    </div>
+                                </div>
+                                <div class="part-button" style="display:none">
+                                    <div class="row">
+                                        <div class="flex20"></div>
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" mbot-touchstart="bleCtrl.up()"
+                                        mbot-touchend="bleCtrl.stop()">
+                                            Up
+                                        </button>
+                                        <div class="flex20"></div>
+                                    </div>
+                                    <div class="row">
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" mbot-touchstart="bleCtrl.left()"
+                                        mbot-touchend="bleCtrl.stop()">
+                                            Left
+                                        </button>
+                                        <div class="flex20"></div>
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" mbot-touchstart="bleCtrl.right()"
+                                        mbot-touchend="bleCtrl.stop()">
+                                            Right
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="flex20"></div>
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" mbot-touchstart="bleCtrl.down()"
+                                        mbot-touchend="bleCtrl.stop()">
+                                            Down
+                                        </button>
+                                        <div class="flex20"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdl-tabs__panel" id="color-panel">
+                            <div class="panel-flex">
+                                <h2 class="mdl-card__title-text">Choose the color to apply</h2>
+                                <canvas mbot-colorpicker="bleCtrl.changeColor(red,blue,green)"></canvas>
+                            </div>
+                        </div>
+                        <div class="mdl-tabs__panel" id="sound-panel">
+                            <div class="panel-flex">
+                                <h2 class="mdl-card__title-text">Press the button to change the sound</h2>
+                                <div class="row">
+                                    <div class="flex20"></div>
+                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" mbot-touchstart="bleCtrl.buzz()">
+                                        Buzz
+                                    </button>
+                                    <div class="flex20"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="part-button" style="display:none">
-                        <div class="row">
-                            <div class="flex20"></div>
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" mbot-touchstart="bleCtrl.up()"
-                                mbot-touchend="bleCtrl.stop()">
-                            Up
-                        </button>
-                            <div class="flex20"></div>
-                        </div>
-                        <div class="row">
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" mbot-touchstart="bleCtrl.left()"
-                                mbot-touchend="bleCtrl.stop()">
-                            Left
-                        </button>
-                            <div class="flex20"></div>
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" mbot-touchstart="bleCtrl.right()"
-                                mbot-touchend="bleCtrl.stop()">
-                            Right
-                        </button>
-                        </div>
-                        <div class="row">
-                            <div class="flex20"></div>
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" mbot-touchstart="bleCtrl.down()"
-                                mbot-touchend="bleCtrl.stop()">
-                            Down
-                        </button>
-                            <div class="flex20"></div>
-                        </div>
-                    </div>
-                    <canvas mbot-colorpicker="bleCtrl.changeColor(red,blue,green)"></canvas>
-                    <div class="row">
-                        <div class="flex20"></div>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" mbot-touchstart="bleCtrl.buzz()">
-                            Buzz
-                        </button>
-                        <div class="flex20"></div>
-                    </div>
+
+
+
+
+
                 </section>
             </div>
-        </main>
+        </div>
     </div>
     <script src="./bundle.js"></script>
     <script src="./libs/nipplejs.js"></script>
