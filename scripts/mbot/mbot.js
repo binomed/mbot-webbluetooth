@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * General configuration (UUID)
+*/
 class Config {
 
     constructor() {
@@ -10,12 +13,13 @@ class Config {
     charateristic() { return "0000ffe3-0000-1000-8000-00805f9b34fb" }
 }
 
-
+// Const for instructions types
 const TYPE_MOTOR = 0x0a,
     TYPE_RGB = 0x08,
     TYPE_SOUND = 0x07;
 
 
+// Const for the ports
 const PORT_1 = 0x01,
     PORT_2 = 0x02,
     PORT_3 = 0x03,
@@ -28,13 +32,20 @@ const PORT_1 = 0x01,
     M_2 = 0x0a;
     
 
+/**
+ * Class for the robot
+ * */
 class MBot {
     constructor() {
         this.device = null;
         this.config = new Config();
         this.onDisconnected = this.onDisconnected.bind(this);
+        this.buzzerIndex = 0;
     }
 
+    /*
+    Request the device with bluetooth
+    */
     request() {
         let options = {
             "filters": [{
@@ -50,6 +61,9 @@ class MBot {
             });
     }
 
+    /**
+     * Connect to the device
+     * */
     connect() {
         if (!this.device) {
             return Promise.reject('Device is not connected.');
@@ -58,6 +72,9 @@ class MBot {
         }
     }
 
+    /**
+     * Control the motors of robot
+    */
     processMotor(valueM1, valueM2) {
         return this._writeCharacteristic(this._genericControl(TYPE_MOTOR, M_1, 0, valueM1))
             .then(() => {
@@ -69,7 +86,8 @@ class MBot {
     }
 
     processBuzzer() {
-        return this._writeCharacteristic(this._genericControl(TYPE_SOUND, 0, 0, 0))
+        this.buzzerIndex = (this.buzzerIndex + 1) % 8;
+        return this._writeCharacteristic(this._genericControl(TYPE_SOUND, PORT_2, 22, this.buzzerIndex))
             .catch(error => {
                 console.error(error);
             });
@@ -102,9 +120,6 @@ class MBot {
         ff 55 len idx action device port  slot  data a
         0  1  2   3   4      5      6     7     8
         */
-        //unsigned char a[11]={0xff,0x55,WRITEMODULE,7,0,0,0,0,0,0,'\n'};
-        //a[4] = [type intValue];
-        //a[5] = (port<<4 & 0xf0)|(slot & 0xf);
         // Static values
         var buf = new ArrayBuffer(16);
         var bufView = new Uint16Array(buf);
@@ -133,21 +148,13 @@ class MBot {
                 // Motor M1
                 // ff:55  09:00  02:0a  09:64  00:00  00:00  0a"
                 // 0x55ff;0x0009;0x0a02;0x0964;0x0000;0x0000;0x000a;0x0000;
-                //"ff:55:09:00:02:0a:09:00:00:00:00:00:0a"
-                // ff:55:09:00:02:0a:09:9c:ff:00:00:00:0a
                 // Motor M2
-                // ff:55:09:00:02:0a:0a:64:00:00:00:00:0a
-                // ff:55:09:00:02:0a:0a:00:00:00:00:00:0a
-                // ff:55:09:00:02:0a:0a:9c:ff:00:00:00:0a
+                // ff:55:09:00:02:0a:0a:64:00:00:00:00:0a                
                 var tempValue = value < 0 ? (parseInt("ffff", 16) + Math.max(-255, value)) : Math.min(255, value);
                 byte7 = tempValue & 0x00ff;
                 byte8 = 0x00;
                 byte8 = tempValue >> 8;
-
-                /*byte5 = 0x0a;
-                byte6 = 0x09;
-                byte7 = 0x64;
-                byte8 = 0x00;*/
+                
 
                 break;
             case TYPE_RGB:

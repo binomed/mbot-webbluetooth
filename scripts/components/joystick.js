@@ -15,37 +15,51 @@ class Joystick {
 
         this.joystick.on('move', this._move.bind(this));
         this.joystick.on('end', this._end.bind(this));
+        this.lastPower = 0;
     }
 
     _move(evt, data) {
-        if(data.direction){
-            switch(data.direction){
-                case 'up':                        
-                break;
-                case 'down':
-                break;
-                case 'left':
-                break;
-                case 'right':
-                break;
-                
+        if (data.direction) {
+            let power = Math.round((data.distance / 100) * 250);
+            if (power != this.lastPower) {
+                this.lastPower = power;                
+                switch (data.direction.angle) {
+                    case 'up':
+                        this.callback({
+                            M1: -power,
+                            M2: power
+                        });
+                        break;
+                    case 'down':
+                        this.callback({
+                            M1: power,
+                            M2: -power
+                        });
+                        break;
+                    case 'left':
+                        this.callback({
+                            M1: power,
+                            M2: power
+                        });
+                        break;
+                    case 'right':
+                        this.callback({
+                            M1: -power,
+                            M2: -power
+                        });
+                        break;
+
+                }
             }
         }
-        /*this.callback({
-            x: data.position.x - data.instance.position.x,
-            y: data.position.y - data.instance.position.y,
-            distance : data.distance,
-            angle : data.direction ? data.direction.angle : null
-        });*/
         
-        console.debug(data);
 
     }
-    
-    _end(evt,data){
-        callback({
-            M1 : 0,
-            M2 : 0
+
+    _end(evt, data) {
+        this.callback({
+            M1: 0,
+            M2: 0
         });
     }
 
