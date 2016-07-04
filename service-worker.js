@@ -17,7 +17,8 @@ let filesToCache = [
     '/assets/images/logo_192.png',
     '/assets/images/logo_256.png',
     '/assets/images/mbot_connect.jpg',
-    '/assets/images/mbot_face.jpg'
+    '/assets/images/mbot_face.jpg',
+    '/manifest.json'
 ];
 
 let cdnToCache = [
