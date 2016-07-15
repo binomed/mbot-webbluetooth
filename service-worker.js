@@ -4,7 +4,7 @@ let cacheFileName = "mBotCache-v3";
 let cacheCdnName = "mBotCdnCache-v1";
 
 let filesToCache = [
-    '/',
+    './',
     './index.html',
     './bundle.js',
     './css/app.css',
