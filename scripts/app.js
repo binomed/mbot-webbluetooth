@@ -31,25 +31,8 @@
                         stepConnect.style.display = "none";
                         stepControl.style.display = "flex";
 
-                        let Joystick = require('./components/joystick.js');
-                        new Joystick('joystick', (data) => {
-                            mBot.processMotor(data.M1, data.M2);
-                        });
-
-                        let partJoystick = document.querySelector('.part-joystick');
                         let partBtn = document.querySelector('.part-button');
-                        let switchParts = document.getElementById('switchParts');
-                        // Switch between button and joystick
-                        switchParts.addEventListener('click', function(evt) {
-                            if (this.checked) {
-                                partBtn.style.display = 'none';
-                                partJoystick.style.display = '';
-                            } else {
-                                partBtn.style.display = '';
-                                partJoystick.style.display = 'none';
-                            }
-                        });
-
+                        
                         // Control the robot by buttons
                         let btnUp = document.getElementById('btnUp');
                         let btnDown = document.getElementById('btnDown');

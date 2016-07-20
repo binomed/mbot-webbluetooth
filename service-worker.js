@@ -1,13 +1,12 @@
 'use strict';
 
-let cacheFileName = "mBotCache-v1";
+let cacheFileName = "mBotCache-v2";
 let cacheCdnName = "mBotCdnCache-v1";
 
 let filesToCache = [
     '/',
     '/index.html',
     '/bundle.js',
-    '/libs/nipplejs.min.js',
     '/css/app.css',
     '/assets/images/color-wheel.png',
     '/assets/images/logo.png',
