@@ -72,7 +72,8 @@
     window.addEventListener('load', pageLoad);
 
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./service-worker.js').then(function() {
+        var scopeSW = location.pathname;
+        navigator.serviceWorker.register('./service-worker.js', {scope : scopeSW}).then(function() {
             console.log('Service Worker Register');
         });
     }
