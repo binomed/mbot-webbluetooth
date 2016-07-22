@@ -5,19 +5,19 @@ let cacheCdnName = "mBotCdnCache-v1";
 
 let filesToCache = [
     '/',
-    '/index.html',
-    '/bundle.js',
-    '/css/app.css',
-    '/assets/images/color-wheel.png',
-    '/assets/images/logo.png',
-    '/assets/images/logo_128.png',
-    '/assets/images/logo_144.png',
-    '/assets/images/logo_152.png',
-    '/assets/images/logo_192.png',
-    '/assets/images/logo_256.png',
-    '/assets/images/mbot_connect.jpg',
-    '/assets/images/mbot_face.jpg',
-    '/manifest.json'
+    './index.html',
+    './bundle.js',
+    './css/app.css',
+    './assets/images/color-wheel.png',
+    './assets/images/logo.png',
+    './assets/images/logo_128.png',
+    './assets/images/logo_144.png',
+    './assets/images/logo_152.png',
+    './assets/images/logo_192.png',
+    './assets/images/logo_256.png',
+    './assets/images/mbot_connect.jpg',
+    './assets/images/mbot_face.jpg',
+    './manifest.json'
 ];
 
 let cdnToCache = [
