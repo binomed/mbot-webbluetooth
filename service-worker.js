@@ -4,21 +4,20 @@ let cacheFileName = "mBotCache-v4";
 let cacheCdnName = "mBotCdnCache-v1";
 
 let filesToCache = [
-    '/',
-    '/index.html',
-    '/bundle.js',
-    '/libs/nipplejs.min.js',
-    '/css/app.css',
-    '/assets/images/color-wheel.png',
-    '/assets/images/logo.png',
-    '/assets/images/logo_128.png',
-    '/assets/images/logo_144.png',
-    '/assets/images/logo_152.png',
-    '/assets/images/logo_192.png',
-    '/assets/images/logo_256.png',
-    '/assets/images/mbot_connect.jpg',
-    '/assets/images/mbot_face.jpg',
-    '/manifest.json'
+    './',
+    './index.html',
+    './bundle.js',
+    './css/app.css',
+    './assets/images/color-wheel.png',
+    './assets/images/logo.png',
+    './assets/images/logo_128.png',
+    './assets/images/logo_144.png',
+    './assets/images/logo_152.png',
+    './assets/images/logo_192.png',
+    './assets/images/logo_256.png',
+    './assets/images/mbot_connect.jpg',
+    './assets/images/mbot_face.jpg',
+    './manifest.json'
 ];
 
 let cdnToCache = [
@@ -30,10 +29,11 @@ let cdnToCache = [
 self.addEventListener('install', function(e) {
     console.log('[ServiceWorker] Install');
     e.waitUntil(
-        caches.open(cacheFileName).then(function(cache) {
-            console.log('[ServiceWorker] Caching app shell');
-            return cache.addAll(filesToCache);
-        })
+        caches.open(cacheFileName)
+            .then(function(cache) {
+                console.log('[ServiceWorker] Caching app shell');
+                return cache.addAll(filesToCache);
+            })
     );
 });
 
@@ -42,7 +42,7 @@ self.addEventListener('activate', function(e) {
     e.waitUntil(
         caches.keys().then(function(keyList) {
             return Promise.all(keyList.map(function(key) {
-                if (key !== cacheFileName) {
+                if (key !== cacheFileName && key != cacheCdnName) {
                     console.log('[ServiceWorker] Removing old cache', key);
                     return caches.delete(key);
                 }
