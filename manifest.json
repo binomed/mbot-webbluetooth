@@ -29,7 +29,7 @@
             "sizes": "512x512"
         }
     ],
-    "start_url": "/index.html",
+    "start_url": "mbot-webbluetooth/index.html",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#eaeae8",
